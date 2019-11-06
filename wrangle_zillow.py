@@ -136,3 +136,5 @@ def zillow_clean():
     df = imputer_9000(df,columns,strategy)
 
     return df
+
+# Scaling
