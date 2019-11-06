@@ -4,6 +4,11 @@ from sklearn.impute import SimpleImputer
 import scipy.stats as stats
 import numpy as np
 from sklearn.impute import SimpleImputer
+import math
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, QuantileTransformer, PowerTransformer,RobustScaler,MinMaxScaler
+
+
 
 
 # Acquire
@@ -120,4 +125,26 @@ def imputer_9000(df,columns,strategy):
         imputer = imputer.fit(df[[column]])
         df[[column]] = imputer.transform(df[[column]])
 
+    return df
+
+# Split
+
+def split_my_data(data, train_ratio = .80, seed = 123):
+    train, test = train_test_split(data, train_size = train_ratio, random_state = seed)
+    return train, test
+
+def scaler_min_max(df, col_list):
+    df_2 = df[col_list]
+    df = df.drop(columns = col_list)
+    scaler = MinMaxScaler(copy=True, feature_range=(0,1)).fit(df_2)
+    df_2 = pd.DataFrame(scaler.transform(df_2), columns=df_2.columns.values).set_index([df_2.index.values])
+    df = df.join(df_2)
+    return df
+
+def uniform_scaler(df, col_list):
+    df_2 = df[col_list]
+    df = df.drop(columns = col_list)
+    scaler = QuantileTransformer(n_quantiles=100, output_distribution='uniform', random_state=123, copy=True).fit(df_2)
+    df_2 = pd.DataFrame(scaler.transform(df_2), columns=df_2.columns.values).set_index([df_2.index.values])
+    df = df.join(df_2)
     return df
