@@ -133,6 +133,8 @@ def split_my_data(data, train_ratio = .80, seed = 123):
     train, test = train_test_split(data, train_size = train_ratio, random_state = seed)
     return train, test
 
+# Scaling
+
 def scaler_min_max(df, col_list):
     df_2 = df[col_list]
     df = df.drop(columns = col_list)
