@@ -3,12 +3,13 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 import scipy.stats as stats
 import numpy as np
-from sklearn.impute import SimpleImputer
-import math
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, QuantileTransformer, PowerTransformer,RobustScaler,MinMaxScaler
-
-
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
+from sklearn.feature_selection import f_regression 
+from math import sqrt
+from statsmodels.formula.api import ols
 
 
 # Acquire
@@ -150,3 +151,29 @@ def uniform_scaler(df, col_list):
     df_2 = pd.DataFrame(scaler.transform(df_2), columns=df_2.columns.values).set_index([df_2.index.values])
     df = df.join(df_2)
     return df
+    
+
+def get_yhat(df,x_col,y_col):
+    lr=LinearRegression()
+    lr.fit(df[x_col],df[[y_col]])
+    predictions=lr.predict(df[x_col])
+    predictions_df = pd.DataFrame({'yhat':predictions.flatten()})
+    
+    return predictions_df
+
+def regression_errors(y, yhat):
+    yhat['y']=y.reset_index(drop=True)
+    yhat['residual']=yhat.yhat-yhat.y
+    
+    ybar = yhat['y'].mean()
+    n = len(yhat)
+
+    sse = sum(yhat.residual**2)
+    mse = sse / n
+    rmse = math.sqrt(sse / n)
+
+    ess = sum((yhat.yhat - ybar)**2)
+    tss = sse + ess
+    r2 = ess/tss
+
+    return sse, mse, rmse, r2
