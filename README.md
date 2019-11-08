@@ -18,7 +18,7 @@ Instructions on setting up the Zillow project and necessary steps to successfull
 - Install Sequel Pro
 - Install Anaconda
 - Use Jupyter Notebook
-- get_function.py files with functions to run model
+- Reference get_function.py files with functions to run model
 
 You must use Python version 3.7 or later and if you do not have PIP installed, you can download and install it from this page: [open](https://pypi.org/project/pip/).
 
