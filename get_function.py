@@ -152,28 +152,12 @@ def uniform_scaler(df, col_list):
     df = df.join(df_2)
     return df
     
-
-def get_yhat(df,x_col,y_col):
-    lr=LinearRegression()
-    lr.fit(df[x_col],df[[y_col]])
-    predictions=lr.predict(df[x_col])
-    predictions_df = pd.DataFrame({'yhat':predictions.flatten()})
-    
-    return predictions_df
-
-def regression_errors(y, yhat):
-    yhat['y']=y.reset_index(drop=True)
-    yhat['residual']=yhat.yhat-yhat.y
-    
-    ybar = yhat['y'].mean()
-    n = len(yhat)
-
-    sse = sum(yhat.residual**2)
-    mse = sse / n
-    rmse = math.sqrt(sse / n)
-
-    ess = sum((yhat.yhat - ybar)**2)
-    tss = sse + ess
-    r2 = ess/tss
-
-    return sse, mse, rmse, r2
+def regression_errors(y, yhat, df):
+    # SSE - sum of squared errors using MSE * len()
+    SSE = mean_squared_error(y, df.yhat) * len(df)
+    # MSE - mean of squared errors
+    MSE = mean_squared_error(y, df.yhat)
+    # RMSE - root mean squared error
+    RMSE = sqrt(MSE)
+    print("SSE: ", SSE, "MSE: ", MSE, "RMSE: ", RMSE)
+    return SSE, MSE, RMSE
