@@ -62,7 +62,7 @@ Replace the following content within your project's env.py file: (host, user, pa
 * Include only the last transaction for each properity.
 * Include Zestimate error and date of transaction.
 * Include properties that include a latitude and longitude value.
-* Remove all properties that are not single family residencies properties.
+* Remove all properties that are not single unit properties (Reference: SQL query in get_function.py).
 
 ## Dictionary
 
