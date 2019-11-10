@@ -53,8 +53,8 @@ Replace the following content within your project's env.py file: (host, user, pa
 ### Goals:
 
 1. Predict the log error
-2. Discover highlights from findings, vizualizations, and real estate domain
-3. Lessons learned within data science, Python, SQL, etc.
+2. Discover highlights from findings, vizualizations, and real estate domain knowledge
+3. Capture lessons learned within data science, Python, SQL, etc.
 
 ### Zilow data:
 
@@ -69,18 +69,18 @@ Replace the following content within your project's env.py file: (host, user, pa
 ### Data Dictionary
 
 **target:** log error equal to the log(zestimate) - log(home_value), values range from -4.65 to 5.26
-              
+
+**age:** created variable for number of years the property is old up to the year 2017
+
+**land_value_square_footage:** created variable of the value per square foot from the land_value divided by the lot_square_feet
+
+**home_value_square_footage:** created variable of the value per square foot from the structure_value divided by the home_square_feet
+
 **bathroom:** the number of bathrooms the unit contains, can include half baths as a .5 value
 
 **bedroom:** number of bedrooms assigned to the unit
 
 **home_square_feet:** amount of square footage size assigned to the unit
-
-**fips:** unique identifier for counties in the U.S.A - Federal Information Processing Standards code
-
-**latitude:** specific north-south position of a unit's location from the earth's equator
-
-**longitude:** specific east-west position of a unit's location from the earth's prime meridian
 
 **lot_square_feet:** amount of square footage size assigned to the land
 
@@ -92,12 +92,10 @@ Replace the following content within your project's env.py file: (host, user, pa
 
 **tax_amount:** value of taxes assessed to the property from previous year
 
-**age:** created variable of number of years the property is old up to the year 2017
+**cluster:** created variable from the K-Means clustering method, varies by number of K
 
-**absolute_target:** created variable from the absolute value of the log error which is equal to the log(zestimate) - log(home_value), created to measure error without negative values
+**avg_home_value_square_footage:** created variable from the cluster groups where the clusters were grouped and the mean was assigned to the variable
 
-**home_value_square_footage:** created variable of the value per square foot from the structure_value divided by the home_square_feet
+**avg_land_value_square_footage:** created variable from the cluster groups where the clusters were grouped and the mean of each cluster was assigned to the variable
 
-**land_value_square_footage:** created variable of the value per square foot from the land_value divided by the lot_square_feet
-
-**`* Note:`** every variable has a data type of: Float64
+**`* Note:`** all variables are assigned a data type of: Float64 except for the int32 "cluster" variable
