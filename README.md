@@ -44,7 +44,7 @@ _**Evaluation**_
 - Analyize evaluation metrics and run test data
 
 **Important:** 
-To reporduce this project please follow along with the logerror_zillow clusterting project notebook [open](https://github.com/P-F-M/logerror_zillow/blob/master/logerror_zillow.ipynb and set: n_init = 1 and Random State equal to 123.
+To reporduce this project please follow along with the logerror_zillow clusterting project notebook [open](https://github.com/P-F-M/logerror_zillow/blob/master/logerror_zillow.ipynb) and set: n_init = 1 and Random State equal to 123.
 
 Replace the following content within your project's env.py file: (host, user, password) 
 
